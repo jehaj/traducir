@@ -1,0 +1,7 @@
+CREATE TABLE "Begreber" (
+	"EngelskUdgave"	TEXT NOT NULL,
+	"DanskUdgave"	TEXT NOT NULL,
+	"Beskrivelse"	TEXT,
+	"Id"	INTEGER,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
