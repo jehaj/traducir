@@ -1,0 +1,13 @@
+body {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+}
+
+p {
+    flex: 1;
+}
