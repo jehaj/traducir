@@ -76,20 +76,19 @@ for terms in terms_collection:
 
 # Get values from https://imada.sdu.dk/~chdj/ordbog.php
 # https://imada.sdu.dk/~chdj/ordbog_en_da.php
-file = open("sidste_side.html")
+# file = open("sidste_side.html")
+# tree = etree.parse(file, parser)
 source = "https://imada.sdu.dk/~chdj/ordbog_en_da.php"
-# resource = requests.get(source)
-tree = etree.parse(file, parser)
-# tree = etree.fromstring(resource.text, parser)
+resource = requests.get(source)
+tree = etree.fromstring(resource.text, parser)
 
-#/html/body/table/tbody/tr/td/em if file
-#reason is that browser automatically adds tbody because 
-#/html/body/table/tr/td/em if request
-terms_amount = len(tree.xpath("/html/body/table/tbody/tr/td/em"))
-print(terms_amount)
+# "/html/body/table/tbody/tr/td/em" if file
+# reason is that browser automatically adds tbody
+# "/html/body/table/tr/td/em" if request
+terms_amount = len(tree.xpath("/html/body/table/tr/td/em"))
 
 for i in range(1, terms_amount):
-    term = tree.xpath(f"/html/body/table/tbody/tr/td/em[{i}]")[0]
+    term = tree.xpath(f"/html/body/table/tr/td/em[{i}]")[0]
     english_term = term.text.strip()
     regex = r"[\s:](?<!\()(?![^\(]*\))"
     danish_term = list(filter(None, re.split(regex, term.tail)))
