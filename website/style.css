@@ -7,6 +7,8 @@ body {
     display: flex;
     flex-direction: row;
     margin-bottom: 15px;
+    gap: 20px;
+    border-bottom: 1px solid black;
 }
 
 p {
