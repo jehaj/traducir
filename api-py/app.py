@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 
 
-query = "SELECT EngelskUdgave, DanskUdgave, Kilde, Id, Aktiv FROM Begreber WHERE (EngelskUdgave LIKE ? OR DanskUdgave LIKE ?) AND Aktiv IS 1;"
+query = "SELECT * FROM fts WHERE fts MATCH ? ORDER BY rank LIMIT 20;"
 queryDisable = "UPDATE Begreber SET Aktiv = 0 WHERE Id = ?"
 
 @app.post("/")
@@ -14,8 +14,8 @@ def searchDb():
     con = sqlite3.connect("../traducir.db")
     cur = con.cursor()
     data = request.data.decode("utf-8")
-    body = f"%{data}%"
-    cur.execute(query, (body, body))
+    body = f"{data}*"
+    cur.execute(query, (body,))
     rows = cur.fetchall()
     con.close()
     return json.dumps(rows)

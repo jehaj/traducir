@@ -29,7 +29,9 @@ con = sqlite3.connect(database_path)
 cur = con.cursor()
 
 # Create table with fields as described in "sql traducir.txt"
-cur.execute(value)
+commands = value.split("\n\n")
+for command in commands[:-2]:
+    cur.execute(command)
 
 # # Get values from https://topdatamat.dk/ordbog.thc
 source = "https://topdatamat.dk/ordbog.thc"
@@ -97,6 +99,11 @@ for i in range(1, terms_amount):
     cur.execute(value, (english_term, danish_term, source))
     
 # Delete duplicates in database
+
+# Insert values into FTS table
+con.commit()
+for command in commands[-2:]:
+    cur.execute(command)
 
 con.commit()
 

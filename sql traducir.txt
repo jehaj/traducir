@@ -7,3 +7,16 @@ CREATE TABLE "Begreber" (
 	"Id"	INTEGER,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 );
+
+CREATE VIRTUAL TABLE fts USING fts5(
+    EngelskUdgave, 
+    DanskUdgave, 
+    Kilde UNINDEXED, 
+    Id UNINDEXED, 
+    content=Begreber, 
+    content_rowid=Id
+);
+
+INSERT INTO fts SELECT EngelskUdgave, DanskUdgave, Kilde, Id FROM Begreber;
+
+INSERT INTO fts(fts) VALUES('optimize');
