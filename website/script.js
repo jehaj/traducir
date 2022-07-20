@@ -34,6 +34,7 @@ inputSearch.addEventListener("input", () => {
                 body: value
             }).then(res => res.json())
               .then(posts => {
+                boxesDiv.innerHTML = "";
                 if (posts.length == 0) {
                     let p = document.createElement("p");
                     p.textContent = "Intet resultat.";
