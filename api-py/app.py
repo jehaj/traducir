@@ -1,7 +1,6 @@
 import json
 from flask import Flask, request
 import sqlite3
-import json
 
 app = Flask(__name__)
 
@@ -11,7 +10,7 @@ queryDisable = "UPDATE Begreber SET Aktiv = 0 WHERE Id = ?"
 
 @app.post("/")
 def searchDb():
-    con = sqlite3.connect("../traducir.db")
+    con = sqlite3.connect("traducir.db")
     cur = con.cursor()
     data = request.data.decode("utf-8")
     body = f"{data}*"
@@ -22,7 +21,7 @@ def searchDb():
 
 @app.delete("/")
 def disableField():
-    con = sqlite3.connect("../traducir.db")
+    con = sqlite3.connect("traducir.db")
     cur = con.cursor()
     id = int(request.data.decode("utf-8"))
     cur.execute(queryDisable, (id,))
