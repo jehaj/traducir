@@ -1,9 +1,19 @@
 # traducir
-Gør det nemmere at bruge danske begreber i datalogi
+Gør det nemmere at bruge danske begreber i datalogi.
 
 # Setup
+## Podman (anbefales)
+Kør
+
+```
+podman kube play kube.yaml
+```
+
+Besøg `http://localhost:1025`. Hvis man ønsker at ændre port / domæne skal man bare ændre `Caddyfile` og `kube.yaml`.
+
+## Manuelt
 Alt efter hvilken distro kan du skifte mellem apt eller dnf.
-`sudo dnf install python3-waitress python3-flask`
+`sudo dnf install python3-waitress python3-flask python3-lxml python3-requests`
 APIen klargøres med:
 `python3 database-setup.py`
 `waitress-serve --listen=127.0.0.1:5000 app:app`
