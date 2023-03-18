@@ -1,17 +1,12 @@
-jehaj.dk {
-    header Content-Type "text/plain; charset=utf-8"
-    respond "Hejsa. Prøv nogle underdomæner."
-}
-
-traducir.jehaj.dk {
+localhost:80 {
     handle_path /api {
-        reverse_proxy http://127.0.0.1:5000
+        reverse_proxy localhost:5000
     }
     
     handle_path /* {
         header Cache-Control max-age=604800
         file_server {
-             root website/
+             root /srv/
         }
     }
 }
