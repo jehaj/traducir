@@ -1,8 +1,9 @@
-import sqlite3
-from lxml import etree
-import requests
 import os
 import re
+import sqlite3
+
+import requests
+from lxml import etree
 
 
 class Concept:
@@ -11,7 +12,6 @@ class Concept:
         self.danish = danish
         self.description = description
         self.source = source
-
 
 database_path = "traducir.db"
 
@@ -23,6 +23,8 @@ if(os.path.exists(database_path)):
 value = ""
 with open("sql traducir.txt") as file:
     value = file.read()
+
+print("Creating database.")
 
 con = sqlite3.connect(database_path)
 
@@ -100,6 +102,8 @@ for i in range(1, terms_amount):
     
 # Delete duplicates in database
 
+print("Inserting into FTS")
+
 # Insert values into FTS table
 con.commit()
 for command in commands[-2:]:
@@ -108,3 +112,5 @@ for command in commands[-2:]:
 con.commit()
 
 con.close()
+
+print("Succesfully created database.")
